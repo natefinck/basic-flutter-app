@@ -30,10 +30,17 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   int _counter = 0;
+  String _name = '';
 
   void _incrementCounter() {
     setState(() {
       _counter++;
+    });
+  }
+
+  void _setName(String name) {
+    setState(() {
+      _name = name;
     });
   }
 
@@ -42,8 +49,7 @@ class _HomeState extends State<Home> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blueGrey,
-        title: Text(widget.title),
-        // title: Text(widget.title, {style: TextStyle(color: Colors.white)}),
+        title: Text(widget.title, style: TextStyle(color: Colors.white)),
       ),
       body: Center(
         child: Column(
@@ -54,6 +60,33 @@ class _HomeState extends State<Home> {
             ),
             Text(
               '$_counter',
+              style: Theme.of(context).textTheme.headlineMedium,
+            ),
+            TextField(
+              onChanged: (value) {
+                _setName(value);
+              },
+              decoration: const InputDecoration(
+                hintText: 'Enter your name',
+                contentPadding:
+                    EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(32.0)),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide:
+                      BorderSide(color: Colors.lightBlueAccent, width: 1.0),
+                  borderRadius: BorderRadius.all(Radius.circular(32.0)),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide:
+                      BorderSide(color: Colors.lightBlueAccent, width: 2.0),
+                  borderRadius: BorderRadius.all(Radius.circular(32.0)),
+                ),
+              ),
+            ),
+            Text(
+              '$_name',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
           ],
